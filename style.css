@@ -1,0 +1,128 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(120deg, #a8dadc, #457b9d);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #f1faee;
+  width: 520px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  color: #1d3557;
+  margin-bottom: 20px;
+}
+
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.add-form input[type="text"], 
+.add-form input[type="date"], 
+.add-form input[type="time"] {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #1d3557;
+  border-radius: 8px;
+  outline: none;
+}
+
+.add-form button {
+  padding: 10px 15px;
+  background-color: #457b9d;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-form button:hover {
+  background-color: #1d3557;
+}
+
+.stats {
+  text-align: center;
+  background: #dff6ff;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 10px;
+  color: #0a3d62;
+  font-weight: 500;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+li {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.2s;
+}
+
+li.done .task-name {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.task-content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.task-time, .task-date {
+  color: #1d3557;
+  font-size: 12px;
+}
+
+.delete-btn {
+  color: #e63946;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.delete-btn:hover {
+  color: #a4161a;
+}
+
+.reset-btn {
+  display: inline-block;
+  background-color: #ffb703;
+  color: #1d3557;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.reset-btn:hover {
+  background-color: #e09f3e;
+}
+
+.bottom-buttons {
+  text-align: center;
+}
