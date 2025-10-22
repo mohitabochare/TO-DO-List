@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📝 To-Do List</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>My Smart To-Do List</h1>
+
+    <form action="/add" method="POST" class="add-form">
+      <input type="text" name="task" placeholder="Enter a new task..." required>
+      <input type="date" name="due_date" required>
+      <input type="time" name="due_time" required>
+      <button type="submit">Add</button>
+    </form>
+
+    <div class="stats" id="statsBox">
+      <p>🧾 Total: <b id="total">{{ total }}</b> | ✅ Completed: <b id="completed">{{ completed }}</b> | 🗑 Deleted: <b id="deleted">{{ deleted }}</b> | ⏳ Remaining: <b id="remaining">{{ remaining }}</b></p>
+    </div>
+
+    <ul id="taskList">
+      {% for task in tasks %}
+      <li class="{{ 'done' if task.done else '' }}">
+        <input type="checkbox" class="tick" data-id="{{ loop.index0 }}" {% if task.done %}checked{% endif %}>
+        <div class="task-content">
+          <span class="task-name">{{ task.name }}</span>
+          <small class="task-time">🕒 Added: {{ task.created_at }}</small><br>
+          <small class="task-date">⏰ Due: {{ task.due_date }} {{ task.due_time }}</small>
+        </div>
+        <a href="/delete/{{ loop.index0 }}" class="delete-btn">✖</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="bottom-buttons">
+      <a href="/reset" class="reset-btn">🔄 Reset List</a>
+    </div>
+  </div>
+
+  <script>
+    // Instant strike + live count update
+    document.querySelectorAll('.tick').forEach(cb => {
+      cb.addEventListener('change', async (e) => {
+        const id = e.target.dataset.id;
+        const li = e.target.closest('li');
+        li.classList.toggle('done');
+
+        const res = await fetch(`/toggle/${id}`, { method: 'POST' });
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('completed').innerText = data.completed;
+          document.getElementById('remaining').innerText = data.remaining;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
